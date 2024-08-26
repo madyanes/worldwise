@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useCities } from '../contexts/CitiesContext'
 import styles from './Map.module.css'
 
@@ -10,14 +10,14 @@ function Map() {
   const [mapPosition, setMapPosition] = useState([40, 0]) // expects lat and lng
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const lat = searchParams.get('lat')
-  const lng = searchParams.get('lng')
+  const mapLat = searchParams.get('lat')
+  const mapLng = searchParams.get('lng')
 
   return (
     <div className={styles.mapContainer}>
       <MapContainer
         center={mapPosition}
-        zoom={13}
+        zoom={6}
         scrollWheelZoom={true}
         className={styles.map}
       >
@@ -36,9 +36,18 @@ function Map() {
             </Popup>
           </Marker>
         ))}
+
+        <ChangeCenter position={[mapLat || 40, mapLng || 0]} />
       </MapContainer>
     </div>
   )
+}
+
+export function ChangeCenter({ position }) {
+  const map = useMap()
+  map.setView(position)
+
+  return null
 }
 
 export default Map
