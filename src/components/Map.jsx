@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
@@ -72,7 +74,7 @@ function Map() {
   )
 }
 
-export function ChangeCenter({ position }) {
+function ChangeCenter({ position }) {
   const map = useMap()
   map.setView(position)
 
