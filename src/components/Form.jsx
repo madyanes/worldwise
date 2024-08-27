@@ -66,7 +66,7 @@ function Form() {
     fetchCityData()
   }, [lat, lng])
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     if (!cityName && !date) return
@@ -80,7 +80,7 @@ function Form() {
       position: { lat, lng },
     }
 
-    createCity(newCity)
+    await createCity(newCity)
     navigate('/app/cities')
   }
 
