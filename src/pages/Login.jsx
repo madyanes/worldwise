@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { replace, useNavigate } from 'react-router-dom'
 import PageNav from '../components/PageNav'
 import styles from './Login.module.css'
 import Button from '../components/Button'
@@ -20,7 +20,7 @@ export default function Login() {
   }
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/app')
+    if (isAuthenticated) navigate('/app', { replace: true })
   }, [isAuthenticated, navigate])
 
   return (
