@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PageNav from '../components/PageNav'
 import styles from './Login.module.css'
 import Button from '../components/Button'
@@ -9,13 +10,18 @@ export default function Login() {
   const [email, setEmail] = useState('jack@example.com')
   const [password, setPassword] = useState('qwerty')
 
-  const { login } = useAuth()
+  const { login, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()
 
     if (email && password) login(email, password)
   }
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/app')
+  }, [isAuthenticated, navigate])
 
   return (
     <main className={styles.login}>
