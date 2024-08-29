@@ -20,7 +20,7 @@ function City() {
 
   useEffect(() => {
     getCity(id)
-  }, [id]) // missing dependency: 'getCity', just ignore it for now, said Jonas
+  }, [id, getCity])
 
   if (isLoading) return <Spinner />
 
